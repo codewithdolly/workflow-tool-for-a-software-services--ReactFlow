@@ -13,50 +13,8 @@ import "./DnDFlow.css";
 const initialNodes = [
   {
     id: "1",
-    type: "input",
-    data: { label: "Send Email" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "2",
     // type: "input",
-    data: { label: "Send SMS" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "3",
-    type: "input",
-    data: { label: "Push Notification" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "4",
-    type: "input",
-    data: { label: "Delay/Wait" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "5",
-    type: "input",
-    data: { label: "Update Contact" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "6",
-    type: "input",
-    data: { label: "Send SMS" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "7",
-    type: "input",
-    data: { label: "Send SMS" },
-    position: { x: 250, y: 5 },
-  },
-  {
-    id: "8",
-    type: "input",
-    data: { label: "Send SMS" },
+    data: { label: "Create your own tool" },
     position: { x: 250, y: 5 },
   },
 ];

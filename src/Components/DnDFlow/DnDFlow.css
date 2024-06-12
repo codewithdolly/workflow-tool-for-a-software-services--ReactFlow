@@ -48,6 +48,11 @@
     background-color: #0041d0 !important;
     color: #eee;
   }
+
+  .createToolBtn:hover{
+    background-color: #0042d0e1 !important;
+    color: white;
+  }
   
   @media screen and (min-width: 768px) {
     .dndflow {
@@ -56,7 +61,13 @@
   
     .dndflow aside {
       width: 20% !important;
-      max-width: 20rem;
+      /* max-width: 18rem; */
+      height: 100vh;
     }
+  }
+
+  .createToolBtn {
+    position: sticky;
+    bottom: 0;
   }
   
