@@ -7,17 +7,63 @@ import ReactFlow, {
   Controls,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import Sidebar from "../Sidbar/Sidbar";
+import Sidebar from "../Sidebar/Sidebar";
 import "./DnDFlow.css";
 
 const initialNodes = [
   {
     id: "1",
     type: "input",
-    data: { label: "input node" },
+    data: { label: "Send Email" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "2",
+    // type: "input",
+    data: { label: "Send SMS" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "3",
+    type: "input",
+    data: { label: "Push Notification" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "4",
+    type: "input",
+    data: { label: "Delay/Wait" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "5",
+    type: "input",
+    data: { label: "Update Contact" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "6",
+    type: "input",
+    data: { label: "Send SMS" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "7",
+    type: "input",
+    data: { label: "Send SMS" },
+    position: { x: 250, y: 5 },
+  },
+  {
+    id: "8",
+    type: "input",
+    data: { label: "Send SMS" },
     position: { x: 250, y: 5 },
   },
 ];
+
+const initialEdeges=[
+  {id:'1-2', source:'1', target:'2', animated: true }
+]
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -25,8 +71,11 @@ const getId = () => `dndnode_${id++}`;
 const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([initialEdeges]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+
+
+
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -49,9 +98,6 @@ const DnDFlow = () => {
         return;
       }
 
-      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
-      // and you don't need to subtract the reactFlowBounds.left/top anymore
-      // details: https://reactflow.dev/whats-new/2023-11-10
       const position = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
@@ -60,7 +106,7 @@ const DnDFlow = () => {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { label: `${type}` },
       };
 
       setNodes((nds) => nds.concat(newNode));

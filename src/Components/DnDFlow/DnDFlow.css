@@ -44,6 +44,10 @@
   .dndflow .selectall {
     margin-top: 10px;
   }
+  .createToolBtn{
+    background-color: #0041d0 !important;
+    color: #eee;
+  }
   
   @media screen and (min-width: 768px) {
     .dndflow {
@@ -51,8 +55,8 @@
     }
   
     .dndflow aside {
-      width: 20%;
-      max-width: 250px;
+      width: 20% !important;
+      max-width: 20rem;
     }
   }
   
