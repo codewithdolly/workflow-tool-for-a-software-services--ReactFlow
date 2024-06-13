@@ -34,6 +34,7 @@ export default function Sidebar() {
     <aside className="d-flex flex-column h-100 px-3 sidebar">
       <div className="flex-grow-1">
         <h5 className="text-dark font-weight-light">Basic Tools</h5>
+        <div className="">
         <button
           type="button"
           className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
@@ -104,6 +105,7 @@ export default function Sidebar() {
           <LanguageIcon /><br />
           Update Contact
         </button>
+      </div>
       </div>
       <div className="mt-auto">
         <button
