@@ -40,17 +40,14 @@
     flex-grow: 1;
     height: 100%;
   }
-  
-  .dndflow .selectall {
-    margin-top: 10px;
-  }
+
   .createToolBtn{
-    background-color: #0041d0 !important;
+    background-color: #5156be !important;
     color: #eee;
   }
 
   .createToolBtn:hover{
-    background-color: #0042d0e1 !important;
+    background-color: #4549a2 !important;
     color: white;
   }
   
@@ -66,8 +63,4 @@
     }
   }
 
-  .createToolBtn {
-    position: sticky;
-    bottom: 0;
-  }
   

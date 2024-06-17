@@ -5,9 +5,8 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import PendingIcon from '@mui/icons-material/Pending';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import LanguageIcon from '@mui/icons-material/Language';
-import "../DnDFlow/DnDFlow.css"; // Ensure you have this CSS file
 
-export default function Sidebar() {
+export default () => {
   const [selectedNodes, setSelectedNodes] = useState([]);
   const [toolData, setToolData] = useState({ tools: [] });
 
@@ -31,91 +30,120 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="d-flex flex-column h-100 px-3 sidebar">
-      <div className="flex-grow-1">
-        <h5 className="text-dark font-weight-light">Basic Tools</h5>
-        <div className="">
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Email")}
-          onDragEnd={() => onDragEnd("Email")}
-          draggable
-        >
-          <MailIcon /><br />
-          Email
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "SMS")}
-          onDragEnd={() => onDragEnd("SMS")}
-          draggable
-        >
-          <ChatIcon /><br />
-          SMS
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Notification")}
-          onDragEnd={() => onDragEnd("Notification")}
-          draggable
-        >
-          <NotificationsActiveIcon /><br />
-          Notification
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Wait")}
-          onDragEnd={() => onDragEnd("Wait")}
-          draggable
-        >
-          <PendingIcon /><br />
-          Wait
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Decision")}
-          onDragEnd={() => onDragEnd("Decision")}
-          draggable
-        >
-          <MultipleStopIcon /><br />
-          Decision
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Webhook")}
-          onDragEnd={() => onDragEnd("Webhook")}
-          draggable
-        >
-          <MailIcon /><br />
-          Webhook
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-dark btn-sm m-2 px-4 py-2"
-          onDragStart={(event) => onDragStart(event, "Update Contact")}
-          onDragEnd={() => onDragEnd("Update Contact")}
-          draggable
-        >
-          <LanguageIcon /><br />
-          Update Contact
-        </button>
+    <aside className="d-flex flex-column px-3" style={{ height: "100vh" }}>
+      <div className="container-fluid p-0">
+        <div className="row">
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Email")}
+              onDragEnd={() => onDragEnd("Email")}
+              draggable
+            >
+              <MailIcon />
+              Email
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "SMS")}
+              onDragEnd={() => onDragEnd("SMS")}
+              draggable
+            >
+              <ChatIcon />
+              SMS
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Notification")}
+              onDragEnd={() => onDragEnd("Notification")}
+              draggable
+            >
+              <NotificationsActiveIcon />
+              Notification
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Wait")}
+              onDragEnd={() => onDragEnd("Wait")}
+              draggable
+            >
+              <PendingIcon />
+              Wait
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Decision")}
+              onDragEnd={() => onDragEnd("Decision")}
+              draggable
+            >
+              <MultipleStopIcon />
+              Decision
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Webhook")}
+              onDragEnd={() => onDragEnd("Webhook")}
+              draggable
+            >
+              <MailIcon />
+              Webhook
+            </button>
+          </div>
+          <div className="col-6 p-1">
+            <button
+              type="button"
+              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              onDragStart={(event) => onDragStart(event, "Update Contact")}
+              onDragEnd={() => onDragEnd("Update Contact")}
+              draggable
+            >
+              <LanguageIcon />
+              Update Contact
+            </button>
+          </div>
+        </div>
       </div>
-      </div>
-      <div className="mt-auto">
-        <button
-          type="button"
-          className="btn btn-block my-3 p-2 createToolBtn"
-          onClick={createTool}
-        >
-          Create Tool
-        </button>
+      <div className="mt-auto mb-3">
+        <div className="d-flex justify-content-between">
+          <button
+            type="button"
+            className="btn btn-primary m-1 flex-fill"
+            onClick={createTool}
+          >
+            Validate
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary m-1 flex-fill"
+            onClick={createTool}
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary m-1 flex-fill"
+            onClick={createTool}
+          >
+            Save & Run
+          </button>
+        </div>
       </div>
     </aside>
   );
-}
+};
