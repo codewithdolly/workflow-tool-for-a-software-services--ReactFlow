@@ -11,11 +11,11 @@ import LabelIcon from "@mui/icons-material/Label";
 import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import GoogleIcon from '@mui/icons-material/Google';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-
+import GoogleIcon from "@mui/icons-material/Google";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import "./Sidebar.css";
 
 const Sidebar = ({ nodes, edges, saveData }) => {
   const onDragStart = (event, nodeType) => {
@@ -47,15 +47,15 @@ const Sidebar = ({ nodes, edges, saveData }) => {
     { label: "Instagram", icon: <InstagramIcon /> },
     { label: "Google", icon: <GoogleIcon /> },
   ];
+  console.log('nodes', nodes);
 
   return (
     <aside
-      className="d-flex flex-column px-4 border shadow"
-      style={{ height: "100vh" }}
+      className="d-flex flex-column px-4 border shadow asideNodes"
     >
       {/* Create Nodes */}
       <div className="container-fluid p-0">
-        <h5 className="text-muted p-2">Nodes</h5>
+        <h5 className="text-muted pb-2 m-0">Nodes</h5>
         <div className="row">
           {nodeTypes.map((node, index) => (
             <div key={index} className="col-6 p-1">
@@ -71,23 +71,23 @@ const Sidebar = ({ nodes, edges, saveData }) => {
             </div>
           ))}
         </div>
-        <div className="row">
-          <h5 className="text-muted p-2 mt-2">Sources</h5>
-          <div className="row">
-        {sourceTypes.map((source, index) => (
-          <div key={index} className="col-6 p-1">
-            <button
-              type="button"
-              className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
-              onDragStart={(event) => onDragStart(event, source.label)}
-              draggable
-            >
-              {source.icon}
-              {source.label}
-            </button>
+        <div className="">
+          <h5 className="text-muted mt-4">Sources</h5>
+          <div className="row overflow-auto">
+            {sourceTypes.map((source, index) => (
+              <div key={index} className="col-6 p-1">
+                <button
+                  type="button"
+                  className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+                  onDragStart={(event) => onDragStart(event, source.label)}
+                  draggable
+                >
+                  {source.icon}
+                  {source.label}
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
         </div>
         {/* Save Buttons at bottom */}
         <div className="fixed-bottom float-right mt-auto mb-3 bg-secondary">
@@ -112,8 +112,10 @@ const Sidebar = ({ nodes, edges, saveData }) => {
           >
             Save & Run
           </button>
+          {/* <pre>{JSON.stringify(nodes, null, 2)}</pre> */}
         </div>
       </div>
+      
     </aside>
   );
 };

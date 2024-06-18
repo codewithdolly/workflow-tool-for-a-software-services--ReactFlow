@@ -100,6 +100,7 @@ const DnDFlow = () => {
           </ReactFlow>
         </div>
         <Sidebar nodes={nodes} edges={edges} saveData={saveData} />
+        
       </ReactFlowProvider>
     </div>
   );
