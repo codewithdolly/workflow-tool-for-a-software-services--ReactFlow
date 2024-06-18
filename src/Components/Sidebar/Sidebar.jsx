@@ -17,7 +17,10 @@ import {
   Instagram as InstagramIcon,
   Google as GoogleIcon,
 } from "@mui/icons-material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./Sidebar.css";
+import { Button, IconButton } from "@mui/material";
 
 const nodeTypes = [
   { label: "Start The Flow", icon: <RadioButtonCheckedIcon /> },
@@ -45,6 +48,8 @@ const sourceTypes = [
 
 const Sidebar = ({ nodes, edges, saveData }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showNodes, setShowNodes] = useState(true);
+  const [showSources, setShowSources] = useState(true);
 
   const filteredNodes = nodeTypes.filter((node) =>
     node.label.toLowerCase().includes(searchQuery.toLowerCase())
@@ -62,47 +67,71 @@ const Sidebar = ({ nodes, edges, saveData }) => {
   return (
     <aside className="d-flex flex-column px-4 asideNodes" style={{ height: "100vh" }}>
       <div className="container-fluid p-0">
-        <input
+       <div className="className">
+       <input
           type="text"
-          className="form-control bg-light"
-          placeholder="Search here..."
+          className="form-control sticky-top bg-white p-4"
+          placeholder="Search nodes or sources..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+       </div>
 
-        <h5 className="text-muted my-3 mt-4">Nodes</h5>
-        <div className="row">
-          {filteredNodes.map((node) => (
-            <div className="col-6 p-1" key={node.label}>
-              <button
-                type="button"
-                className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
-                onDragStart={(event) => onDragStart(event, node.label)}
-                draggable
-              >
-                {node.icon}
-                {node.label}
-              </button>
-            </div>
-          ))}
-        </div>
-{/* Sources starts */}
-        <h5 className="text-muted my-3 mt-4 ">Sources</h5>
-        <div className="row">
-          {filteredSources.map((source) => (
-            <div className="col-6 p-1" key={source.label}>
-              <button
-                type="button"
-                className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
-                onDragStart={(event) => onDragStart(event, source.label)}
-                draggable
-              >
-                {source.icon}
-                {source.label}
-              </button>
-            </div>
-          ))}
-        </div>
+        <h5 className="text-muted pt-4 p-0 d-flex justify-content-between">
+          Nodes
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => setShowNodes(!showNodes)}
+          >
+            {showNodes ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+          </IconButton>
+        </h5>
+        {showNodes && (
+          <div className="row">
+            {filteredNodes.map((node) => (
+              <div className="col-6 p-1" key={node.label}>
+                <button
+                  type="button"
+                  className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+                  onDragStart={(event) => onDragStart(event, node.label)}
+                  draggable
+                >
+                  {node.icon}
+                  {node.label}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <h5 className="text-muted pt-4 d-flex justify-content-between">
+          Sources
+          <IconButton
+            aria-label="sources"
+            size="small"
+            onClick={() => setShowSources(!showSources)}
+          >
+            {showNodes ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+          </IconButton>
+        </h5>
+        {showSources && (
+          <div className="row">
+            {filteredSources.map((source) => (
+              <div className="col-6 p-1" key={source.label}>
+                <button
+                  type="button"
+                  className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+                  onDragStart={(event) => onDragStart(event, source.label)}
+                  draggable
+                >
+                  {source.icon}
+                  {source.label}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="fixed-bottom float-right mt-auto mb-3 bg-secondary">
           <button
