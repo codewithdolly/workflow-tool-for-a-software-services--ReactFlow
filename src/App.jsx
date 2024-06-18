@@ -6,7 +6,7 @@ import DnDFlow from "./Components/DnDFlow/DnDFlow";
 export default function App() {
 
   return (
-    <div className="app" style={{ width: "98vw", height: "98vh", border:'1px solid, brown' }}>
+    <div className="app" style={{ width: "98vw", height: "98vh", border:'1px solid, red' }}>
       <DnDFlow />
       
     </div>
