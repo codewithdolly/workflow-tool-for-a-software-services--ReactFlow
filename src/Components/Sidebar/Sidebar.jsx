@@ -11,6 +11,11 @@ import LabelIcon from "@mui/icons-material/Label";
 import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import GoogleIcon from '@mui/icons-material/Google';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import FacebookIcon from '@mui/icons-material/Facebook';
+
 
 const Sidebar = ({ nodes, edges, saveData }) => {
   const onDragStart = (event, nodeType) => {
@@ -18,7 +23,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
     event.dataTransfer.effectAllowed = "move";
   };
 
-  // Node Variables 
+  // Node Variables
   const nodeTypes = [
     { label: "Start The Flow", icon: <RadioButtonCheckedIcon /> },
     { label: "Email", icon: <MailIcon /> },
@@ -36,6 +41,13 @@ const Sidebar = ({ nodes, edges, saveData }) => {
     { label: "End The Flow", icon: <MoreHorizIcon /> },
   ];
 
+  const sourceTypes = [
+    { label: "Facebook", icon: <FacebookIcon /> },
+    { label: "LinkedIn", icon: <LinkedInIcon /> },
+    { label: "Instagram", icon: <InstagramIcon /> },
+    { label: "Google", icon: <GoogleIcon /> },
+  ];
+
   return (
     <aside
       className="d-flex flex-column px-4 border shadow"
@@ -45,20 +57,38 @@ const Sidebar = ({ nodes, edges, saveData }) => {
       <div className="container-fluid p-0">
         <h5 className="text-muted p-2">Nodes</h5>
         <div className="row">
-        {nodeTypes.map((node, index) => (
+          {nodeTypes.map((node, index) => (
+            <div key={index} className="col-6 p-1">
+              <button
+                type="button"
+                className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+                onDragStart={(event) => onDragStart(event, node.label)}
+                draggable
+              >
+                {node.icon}
+                {node.label}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="row">
+          <h5 className="text-muted p-2 mt-2">Sources</h5>
+          <div className="row">
+        {sourceTypes.map((source, index) => (
           <div key={index} className="col-6 p-1">
             <button
               type="button"
               className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
-              onDragStart={(event) => onDragStart(event, node.label)}
+              onDragStart={(event) => onDragStart(event, source.label)}
               draggable
             >
-              {node.icon}
-              {node.label}
+              {source.icon}
+              {source.label}
             </button>
           </div>
         ))}
       </div>
+        </div>
         {/* Save Buttons at bottom */}
         <div className="fixed-bottom float-right mt-auto mb-3 bg-secondary">
           <button
