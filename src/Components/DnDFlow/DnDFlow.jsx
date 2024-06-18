@@ -64,7 +64,11 @@ const DnDFlow = () => {
         data: { label: `${type}` },
       };
 
-      setNodes((nds) => nds.concat(newNode));
+      setNodes((nds) => {
+        // Check if the initial node exists and remove it
+        const filteredNodes = nds.filter((node) => node.id !== "1");
+        return filteredNodes.concat(newNode);
+      });
     },
     [reactFlowInstance]
   );
@@ -102,6 +106,3 @@ const DnDFlow = () => {
 };
 
 export default DnDFlow;
-
-
- 
