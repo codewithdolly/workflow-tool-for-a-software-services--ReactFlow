@@ -64,6 +64,8 @@ const Sidebar = ({ nodes, edges, saveData }) => {
     event.dataTransfer.effectAllowed = "move";
   };
 
+  console.log('nodes', nodes);
+
   return (
     <aside className="d-flex flex-column px-4 asideNodes" style={{ height: "100vh" }}>
       <div className="container-fluid p-0">
