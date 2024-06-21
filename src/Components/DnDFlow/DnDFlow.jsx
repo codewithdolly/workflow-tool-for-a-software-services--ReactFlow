@@ -14,7 +14,7 @@ import "./DnDFlow.css";
 const initialNodes = [
   {
     id: "1",
-    data: { label: "Create your own tool" },
+    data: { label: "Text" },
     position: { x: 250, y: 5 },
   },
 ];

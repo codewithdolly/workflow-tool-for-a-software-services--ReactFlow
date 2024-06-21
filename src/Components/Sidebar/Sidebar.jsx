@@ -10,8 +10,6 @@ import {
   PlaylistAdd as PlaylistAddIcon,
   Schedule as ScheduleIcon,
   LabelOutlined as LabelOutlinedIcon,
-  Label as LabelIcon,
-  MoreHoriz as MoreHorizIcon,
   Facebook as FacebookIcon,
   LinkedIn as LinkedInIcon,
   Instagram as InstagramIcon,
@@ -21,22 +19,34 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./Sidebar.css";
 import { Button, IconButton } from "@mui/material";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import SendIcon from '@mui/icons-material/Send';
+import PlaylistRemoveOutlinedIcon from '@mui/icons-material/PlaylistRemoveOutlined';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import LabelIcon from '@mui/icons-material/Label';
+import Logo from "../../../public/workflow logo.png";
 
 const nodeTypes = [
-  { label: "Start The Flow", icon: <RadioButtonCheckedIcon /> },
+  { label: "Start", icon: <RadioButtonCheckedIcon /> },
   { label: "Email", icon: <MailIcon /> },
   { label: "SMS", icon: <ChatIcon /> },
   { label: "Notification", icon: <NotificationsActiveIcon /> },
   { label: "Wait", icon: <PendingIcon /> },
   { label: "Decision", icon: <MultipleStopIcon /> },
   { label: "Webhook", icon: <MailIcon /> },
+ 
   { label: "Update Contact", icon: <PermContactCalendarIcon /> },
-  { label: "Slack Message", icon: <ChatIcon /> },
-  { label: "Create Task", icon: <PlaylistAddIcon /> },
   { label: "Schedule Meeting", icon: <ScheduleIcon /> },
+  { label: "Slack Message", icon: <SendIcon /> },
+  { label: "Create Task", icon: <PlaylistAddIcon /> },
+  { label: "Remove Task", icon: <PlaylistRemoveOutlinedIcon /> },
+ 
   { label: "Add Tag", icon: <LabelOutlinedIcon /> },
-  { label: "Remove Task", icon: <LabelIcon /> },
-  { label: "End The Flow", icon: <MoreHorizIcon /> },
+  { label: "Remove Tag", icon: <LabelIcon /> },
+  { label: "Accept", icon: <CheckCircleOutlineIcon /> },
+  { label: "Reject", icon: <CancelOutlinedIcon /> },
+  { label: "End", icon: <DoneAllIcon /> },
 ];
 
 const sourceTypes = [
@@ -69,15 +79,16 @@ const Sidebar = ({ nodes, edges, saveData }) => {
   return (
     <aside className="d-flex flex-column px-4 asideNodes" style={{ height: "100vh" }}>
       <div className="container-fluid p-0">
-       <div className="className">
-       <input
+      <div className="sticky-top bg-white">
+         <img src={Logo} alt="Mix flow" className="img-fluid" style={{ maxHeight: '100px' }} />
+        <input
           type="text"
-          className="form-control sticky-top bg-white p-4"
+          className="form-control"
           placeholder="Search nodes or sources..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-       </div>
+      </div>
 
         <h5 className="text-muted pt-4 p-0 d-flex justify-content-between">
           Nodes
@@ -95,7 +106,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
               <div className="col-6 p-1" key={node.label}>
                 <button
                   type="button"
-                  className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
+                  className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100 NodesBtn"
                   onDragStart={(event) => onDragStart(event, node.label)}
                   draggable
                 >
@@ -114,7 +125,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
             size="small"
             onClick={() => setShowSources(!showSources)}
           >
-            {showNodes ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+            {showSources ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
           </IconButton>
         </h5>
         {showSources && (
