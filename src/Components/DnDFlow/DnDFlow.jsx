@@ -5,7 +5,7 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   Controls,
-  Background
+  Background,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Sidebar from "../Sidebar/Sidebar";
@@ -20,17 +20,24 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: '1-2', source: '1', target: '2', animated: true }
+  { id: "1-2", source: "1", target: "2", animated: true }
 ];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+
+const alignYPosition = (position, lastPosition, gap = 60) => {
+  return lastPosition ? { ...position, y: lastPosition.y + gap } : position;
+};
 
 const DnDFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const reactFlowWrapper = useRef(null);
+
+  // To store the position of the last dropped node
+  const lastNodePosition = useRef(null);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
@@ -52,10 +59,13 @@ const DnDFlow = () => {
         return;
       }
 
-      const position = reactFlowInstance.project({
-        x: event.clientX - reactFlowWrapper.current.getBoundingClientRect().left,
-        y: event.clientY - reactFlowWrapper.current.getBoundingClientRect().top,
+      const containerBounds = reactFlowWrapper.current.getBoundingClientRect();
+      const reactFlowBounds = reactFlowInstance.project({
+        x: containerBounds.width / 2 - containerBounds.left,
+        y: containerBounds.height / 2 - containerBounds.top,
       });
+
+      const position = alignYPosition(reactFlowBounds, lastNodePosition.current);
 
       const newNode = {
         id: getId(),
@@ -65,16 +75,17 @@ const DnDFlow = () => {
       };
 
       setNodes((nds) => {
-        // Check if the initial node exists and remove it
         const filteredNodes = nds.filter((node) => node.id !== "1");
         return filteredNodes.concat(newNode);
       });
+
+      // Update the last node position
+      lastNodePosition.current = position;
     },
     [reactFlowInstance]
   );
 
   const saveData = () => {
-    // Save nodes and edges to a backend or localStorage or wherever needed
     const dataToSave = { nodes, edges };
     console.log("Saving data: ", dataToSave);
     // Example: localStorage.setItem("flowData", JSON.stringify(dataToSave));
@@ -100,7 +111,6 @@ const DnDFlow = () => {
           </ReactFlow>
         </div>
         <Sidebar nodes={nodes} edges={edges} saveData={saveData} />
-        
       </ReactFlowProvider>
     </div>
   );

@@ -80,7 +80,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
     <aside className="d-flex flex-column px-4 asideNodes" style={{ height: "100vh" }}>
       <div className="container-fluid p-0">
       <div className="sticky-top bg-white">
-         <img src={Logo} alt="Mix flow" className="img-fluid" style={{ maxHeight: '100px' }} />
+         <img src={Logo} alt="Mix flow" className="img-fluid" style={{ maxHeight: '80px' }} />
         <input
           type="text"
           className="form-control"
