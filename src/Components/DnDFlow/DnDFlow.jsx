@@ -25,7 +25,6 @@ const initialEdges = [
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
-
 const alignYPosition = (position, lastPosition, gap = 60) => {
   return lastPosition ? { ...position, y: lastPosition.y + gap } : position;
 };
