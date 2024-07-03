@@ -10,18 +10,24 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import Sidebar from "../Sidebar/Sidebar";
 import "./DnDFlow.css";
+import CustomNode from '../Sidebar/CustomNode';
+
+// Define the nodeTypes object with your custom node type
+const nodeTypes = {
+  customNode: CustomNode,
+};
 
 const initialNodes = [
+
   {
-    id: "1",
-    data: { label: "Text" },
+    id: '1',
+    type: 'customNode', // Use the custom node type here
     position: { x: 250, y: 5 },
+    data: { label: 'Text here',},
   },
 ];
 
-const initialEdges = [
-  { id: "1-2", source: "1", target: "2", animated: true }
-];
+const initialEdges = [];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -103,6 +109,7 @@ const DnDFlow = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            nodeTypes={nodeTypes} // Register the custom node types here
             fitView
           >
             <Controls />

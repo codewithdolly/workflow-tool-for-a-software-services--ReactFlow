@@ -1,16 +1,9 @@
-import ReactFlow, { Handle } from 'reactflow';
-// import 'reactflow/dist/style.css';
+import React from 'react'
 
-const CustomNode = ({ data }) => {
+function CustomNode() {
   return (
-    <div style={{ height: 800 }}>
-      <Handle type="target" position="top" />
-      {data.icon}
-      <div>{data.label}</div>
-      <Handle type="source" position="bottom" />
-    </div>
-  );
-};
+    <div>Start your Design ➡️</div>
+  )
+}
 
-
-export default CustomNode;
+export default CustomNode
