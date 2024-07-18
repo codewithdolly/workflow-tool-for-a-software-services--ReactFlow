@@ -4,10 +4,11 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { IconButton } from "@mui/material";
 import Logo from "../../../public/workflow logo.png";
 import nodeObjects from "./NodeObjects"; // Adjust the import path as needed
-import CustomNode from "./CustomNode";
+// import CustomNode from "../Nodes/CustomNode/CustomNode";
 import "./Sidebar.css";
 
-const Sidebar = ({ nodes, edges, saveData }) => {
+// const Sidebar = ({ nodes, edges, setNodes, saveData }) => {
+  const Sidebar = ({ nodes, edges, saveData }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showNodes, setShowNodes] = useState(true);
   
@@ -21,15 +22,17 @@ const Sidebar = ({ nodes, edges, saveData }) => {
 
   const filteredSources = nodeObjects.filter(
     (node) =>
-      node.type === "sourceType" &&
+      node.type === "sourceNode" &&
       node.data.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const onDragStart = (event, nodeData) => {
+    console.log("Source - ",nodeData)
     event.dataTransfer.setData(
       "application/reactflow",
       JSON.stringify(nodeData)
     );
+// setNodes(...nodes, nodeData)
     event.dataTransfer.effectAllowed = "move";
   };
 
@@ -72,7 +75,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
                   <button
                     type="button"
                     className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100 NodesBtn"
-                    onDragStart={(event) => onDragStart(event, node.data.icon)}
+                    onDragStart={(event) => onDragStart(event, node)}
                     draggable
                   >
                     {node.data.icon}
@@ -106,7 +109,7 @@ const Sidebar = ({ nodes, edges, saveData }) => {
                     type="button"
                     className="btn btn-outline-dark btn-sm d-flex flex-column align-items-center justify-content-center w-100 h-100"
                     onDragStart={(event) =>
-                      onDragStart(event, source.data.icon)
+                      onDragStart(event, source)
                     }
                     draggable
                   >

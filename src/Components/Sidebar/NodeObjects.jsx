@@ -40,10 +40,12 @@ const nodeObjects = [
   { id: 15, data: { label: "Accept", icon: <CheckCircleOutlineIcon /> }, type: "CustomNode" },
   { id: 16, data: { label: "Reject", icon: <CancelOutlinedIcon /> }, type: "CustomNode" },
   { id: 17, data: { label: "End", icon: <DoneAllIcon /> }, type: "CustomNode" },
-  { id: 18, data: { label: "Facebook", icon: <FacebookIcon /> }, type: "sourceType" },
-  { id: 19, data: { label: "LinkedIn", icon: <LinkedInIcon /> }, type: "sourceType" },
-  { id: 20, data: { label: "Instagram", icon: <InstagramIcon /> }, type: "sourceType" },
-  { id: 21, data: { label: "Google", icon: <GoogleIcon /> }, type: "sourceType" },
+  { id: 18, data: { label: "Facebook", icon: <FacebookIcon /> }, type: "sourceNode" },
+  { id: 19, data: { label: "LinkedIn", icon: <LinkedInIcon /> }, type: "sourceNode" },
+  { id: 20, data: { label: "Instagram", icon: <InstagramIcon /> }, type: "sourceNode" },
+  { id: 21, data: { label: "Google", icon: <GoogleIcon /> }, type: "sourceNode" },
 ];
+
+
 
 export default nodeObjects;
