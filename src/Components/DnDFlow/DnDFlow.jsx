@@ -1,3 +1,4 @@
+// src/Components/DnDFlow/DnDFlow.jsx
 import React, { useState, useRef, useCallback } from "react";
 import ReactFlow, {
   ReactFlowProvider,
@@ -13,38 +14,39 @@ import "./DnDFlow.css";
 import nodeObjects from "../Sidebar/NodeObjects";
 import CustomNode from "../Nodes/CustomNode/CustomNode";
 import SourceNode from "../Nodes/CustomNode/SourceNode";
-import CustomEdge from "../Edges/CustomEdge";
+import CustomEdge from "../Edges/CustomEdge/CustomEdge";
 
-// Define the nodeTypes object with your custom node type
 const nodeTypes = {
   customNode: CustomNode,
-  sourceNode: SourceNode
+  sourceNode: SourceNode,
 };
+
 const edgeTypes = {
   customEdge: CustomEdge,
 };
 
 const initialNodes = [
-
   {
-    id: '1',
-    type: 'customNode', // Use the custom node type here
+    id: "1",
+    type: "customNode",
     position: { x: 250, y: 5 },
-    data: { label: 'Start your Design here ➡️',},
+    data: { label: "Start your Design here ➡️" },
   },
 ];
 
-const initialEdges = [{
-  id: 'e1-2',
-  source: '1',
-  target: '2',
-  type: 'customEdge',
-  animated: true,
-},];
+const initialEdges = [
+  {
+    id: "e1-2",
+    source: "1",
+    target: "2",
+    type: "customEdge",
+    animated: true,
+  },
+];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
-const alignYPosition = (position, lastPosition, gap = 60) => {
+const alignYPosition = (position, lastPosition, gap = 600) => {
   return lastPosition ? { ...position, y: lastPosition.y + gap } : position;
 };
 
@@ -54,11 +56,10 @@ const DnDFlow = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const reactFlowWrapper = useRef(null);
 
-  // To store the position of the last dropped node
   const lastNodePosition = useRef(null);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => setEdges((eds) => addEdge({ ...params, type: "customEdge" }, eds)),
     []
   );
 
@@ -72,7 +73,6 @@ const DnDFlow = () => {
       event.preventDefault();
 
       const type = event.dataTransfer.getData("application/reactflow");
-
       if (typeof type === "undefined" || !type) {
         return;
       }
@@ -84,23 +84,17 @@ const DnDFlow = () => {
       });
 
       const position = alignYPosition(reactFlowBounds, lastNodePosition.current);
-      let parsedType = JSON.parse(type)
-      let nodeData= nodeObjects.filter((node)=> node.id === parsedType.id)
+      let parsedType = JSON.parse(type);
+      let nodeData = nodeObjects.find((node) => node.id === parsedType.id);
 
       const newNode = {
         id: getId(),
-        type:nodeData[0].type === "sourceNode" ? "sourceNode":"customNode",
+        type: nodeData.type === "sourceNode" ? "sourceNode" : "customNode",
         position,
-        // data: { label: `${JSON.parse(type)}` },
-        data: nodeData[0].data,
+        data: nodeData.data,
       };
 
-      setNodes((nds) => {
-        const filteredNodes = nds.filter((node) => node.id !== "1");
-        return filteredNodes.concat(newNode);
-      });
-
-      // Update the last node position
+      setNodes((nds) => nds.concat(newNode));
       lastNodePosition.current = position;
     },
     [reactFlowInstance]
@@ -125,7 +119,7 @@ const DnDFlow = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
-            nodeTypes={nodeTypes} // Register the custom node types here
+            nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
             fitView
           >
@@ -133,7 +127,6 @@ const DnDFlow = () => {
             <Background gap={10} color="#ccc" variant="dots" />
           </ReactFlow>
         </div>
-        {/* <Sidebar nodes={nodes} setNodes={setNodes} edges={edges} saveData={saveData} /> */}
         <Sidebar nodes={nodes} edges={edges} saveData={saveData} />
       </ReactFlowProvider>
     </div>
