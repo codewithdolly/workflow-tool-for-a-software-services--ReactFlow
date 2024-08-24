@@ -46,7 +46,9 @@ const initialEdges = [
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
-const alignYPosition = (position, lastPosition, gap = 600) => {
+
+// Reintroducing alignYPosition with a default gap of 50
+const alignYPosition = (position, lastPosition, gap = 50) => {
   return lastPosition ? { ...position, y: lastPosition.y + gap } : position;
 };
 
@@ -83,7 +85,7 @@ const DnDFlow = () => {
         y: containerBounds.height / 2 - containerBounds.top,
       });
 
-      const position = alignYPosition(reactFlowBounds, lastNodePosition.current);
+      const position = alignYPosition(reactFlowBounds, lastNodePosition.current); // Using alignYPosition with default gap
       let parsedType = JSON.parse(type);
       let nodeData = nodeObjects.find((node) => node.id === parsedType.id);
 
